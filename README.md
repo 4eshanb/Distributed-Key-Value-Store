@@ -9,7 +9,7 @@ Supports view operations, sharded operations, and key-value operations.
 Note: if there are <= 3 nodes running, there will only be one shard
 
 ## Hash Function
-![Alt text](Diagrams/HashFunction.png?raw=true "Hash Function" width="48)
+<img src="Diagrams/HashFunction.png" width="48">
 
 ## Consistent Hashing with Shards
 ![Alt text](Diagrams/Shards1.png?raw=true "Shards")
