@@ -13,3 +13,6 @@ Note: if there are <= 3 nodes running, there will only be one shard
 
 ## Consistent Hashing with Shards
 ![Alt text](Diagrams/Shards1.png?raw=true "Shards")
+
+## Node Crash Example
+![Alt text](Diagrams/ShardCrash.png?raw=true "Shards")
