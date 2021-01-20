@@ -19,3 +19,6 @@ Note: if there are <= 3 nodes running, there will only be one shard
 
 ## Vector Clocks for Causal Consistency
 ![Alt text](Diagrams/VC1.png?raw=true "Shards")
+
+## Causal Anomaly
+![Alt text](Diagrams/CausalAnom.png?raw=true "Shards")
