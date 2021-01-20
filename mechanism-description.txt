@@ -1,0 +1,50 @@
+Shard Operations:
+
+ - Make sure each shard has at least two nodes
+   - given the view global variable, we make a view list
+   - We divide the view_list by the number of shard ids to get the nodes per shard
+   - Then we assign the nodes to the shard ids in a shard dictionary 
+   - each node has at least 2 nodes in it because if a node has less than two nodes in it either for the next shard_id 
+     or the previous shard id, we append the last node to the current shard_id. We can do this because if there is less than
+     two nodes in the shard, there is 1 node left
+
+ - Get the IDs of all the shards in the store
+    - We used integer shard IDs 
+    - We did this by making each relpica have a view of the shard IDs
+    - The shard IDs were created by getting the environment variable SHARD_COUNT
+    - Then we set the IDs to a list in the range of the SHARD_COUNT
+
+- Get the shard ID of a node
+    - We created a shard_dictionary where each relpica could see this globally
+    - The keys of the dictionary are the shard ids, and the values are a list of the replicas split evenly
+    - using the environment variable SOCKET_ADDRESS we are able to check which shard_id is the node in with a loop
+      iterating over the dictionary
+
+- Get the members of a shard with a given ID
+    - We can find this easily given the shard_dict declared globally
+    - the nodes return are in a list form
+
+-  Get the number of keys stored in the shard
+    - since the keys are replicated across nodes in the shard, we can just return the length of the key value store global variable
+
+- Add a node to the shard
+    - Since the new node does not have a shard count, it cannot have the shard_dict or the shard_ids, therefore,
+      the new node gets the shard_ids, shard_dict, and key_value_store from another member of its shard in the add_member viewpoint.
+
+- Resharding the key value store
+    - We replace the shard_dict and shard_ids with new information given the new shard_count
+    - We ensure these are correct the same way mentioned above
+    - then we must split the key values evenly between shards, so we set the key_value_store for
+      each shard to nothing and put all the key values in again split into different shards by the put Operation
+
+
+Key-value Operations:
+    - To ensure:
+        - Each key belongs to exactly one shard.
+        - Keys are (more or less) evenly distributed across the shards.
+        - Any node should be able to determine what shard a key belongs to (without having to query every shard for it).
+
+    We use a hash function, specifically hash mod N where we add the ascii values of the each character in a key to get a total.
+    Then we find the modulus of this with N being the number of shard_ids.Then accordingly we broadcast this information to each replica in the shard. We can easily
+    put, get, or delete a value just by finding the result of the hash function. Depending on the key we can find which shard the key belongs to if it exists and replicate the 
+    operations based on our broadcast function. If a replica is down it doesn't matter because each shard has at least two nodes in it and the key values are replicated between them. 
