@@ -16,3 +16,6 @@ Note: if there are <= 3 nodes running, there will only be one shard
 
 ## Node Crash Example
 ![Alt text](Diagrams/ShardCrash.png?raw=true "Shards")
+
+## Vector Clocks for Causal Consistency
+![Alt text](Diagrams/VC1.png?raw=true "Shards")
