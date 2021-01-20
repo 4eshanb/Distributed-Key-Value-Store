@@ -7,5 +7,5 @@ Distributed Keys with Consistent hashing; a hash function is used to split key-v
 Supports view operations, sharded operations, and key-value operations.
 
 
-## Hash Function
+### Hash Function
 ![Alt text](Diagrams/HashFunction.png?raw=true "Hash Function")
