@@ -33,7 +33,6 @@ curl --request GET --header "Content-Type: application/json" --write-out "\n%{ht
 
 
 
-ASG 3:
 curl --request PUT --header "Content-Type: application/json" --write-out "\n%{http_code}\n" --data '{"value": 1, "causal-metadata": ""}' http://localhost:8082/key-value-store/x
 
 
